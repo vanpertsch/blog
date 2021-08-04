@@ -6,6 +6,7 @@ const methodOverride = require('method-override')
 const app = express()
 
 require("dotenv").config();
+var port = process.env.PORT || 8080;
 
 mongoose.connect(
   process.env.DB_URL,
@@ -31,4 +32,6 @@ app.get('/', async (req,res) => {
   )
 })
 app.use('/articles', articleRouter)
-app.listen(5000);
+app.listen(port, function () {
+  console.log("app running on port 8080");
+});
