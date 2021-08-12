@@ -31,6 +31,19 @@ app.get('/', async (req,res) => {
   {articles: articles}
   )
 })
+
+app.get("/data", async (req,res) => {
+
+  const articles = await Article.find((err, foundArticles)=>{
+    if(!err){
+      res.send(foundArticles);
+    }else{
+      res.send(err);
+    }
+  })
+
+})
+
 app.use('/articles', articleRouter)
 app.listen(port, function () {
   console.log("app running on port 8080");
