@@ -11,13 +11,13 @@
 </head>
 <body>
 <div class="container">
-  <h1 class="mb-4">Blog Articles</h1>
-  <a href="/articles/new" class="btn btn-success">New Article</a>
+  <h1 class="mb-4">Blog Articles über <%= keyWord %> </h1>
+  <a href="/" class="btn btn-secondary">All Articles</a>
 
   <% articles.forEach(article => { %>
     <div class="card mt-4">
       <div class="card-body">
-      <a href="/articles/themen/<%= article.keyWordSlug %>" class=""><%= article.keyWordSlug %></a>
+        <a href="/articles/themen/<%= article.keyWordSlug %>" class=""><%= article.keyWordSlug %></a>
         <h4> <%= article.title %>  </h4>
 <div class="card-subtitle text-muted mb-2">
   <%= article.createdAt.toLocaleDateString()  %>
@@ -25,6 +25,7 @@
 <div class="card-text mb-2">
   <%=  article.description %>
 </div>
+
 <a href="/articles/<%= article.slug %>" class="btn btn-primary">Read more</a>
 <a href="/articles/edit/<%= article.id %>" class="btn btn-info">Edit</a>
 <form action="/articles/<%= article.id %>?_method=DELETE" method="POST" class="d-inline">

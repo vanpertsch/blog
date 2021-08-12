@@ -24,10 +24,16 @@ createdAt:{
   type: Date,
   default: Date.now
 },
+keyWord:{
+  type: String
+},
 slug: {
   type: String,
   required:true,
   unique: true
+},
+keyWordSlug: {
+  type: String,
 },
 sanitizedHtml: {
   type: String,
@@ -41,6 +47,12 @@ articleSchema.pre('validate', function(next){
     this.slug = slugify(this.title, {
       lower: true,
       strict: true
+    })
+  }
+  if(this.keyWord){
+    this.keyWordSlug = slugify(this.keyWord, {
+      lower: true,
+      strict: true,
     })
   }
   if (this.markdown) {

@@ -17,6 +17,17 @@ router.get("/:slug", async (req,res) => {
   res.render('articles/show', { article:article})
 
 })
+router.get("/themen/:keyWordSlug", async (req,res) => {
+  const articles = await Article.find({
+    keyWordSlug: req.params.keyWordSlug,
+  }).sort({
+    createdAt:'desc'
+  })
+  res.render("articles/keyword", {
+    articles: articles,
+    keyWord: req.params.keyWordSlug,
+  });
+})
 
 router.post("/", async (req, res, next) => {
   req.article = new Article()
@@ -32,6 +43,7 @@ function saveArticleAndRedirect(path){
   return async (req,res) => {
       let article = req.article
       article.title = req.body.title
+      article.keyWord = req.body.keyWord
       article.description = req.body.description
       article.markdown = req.body.markdown
 
